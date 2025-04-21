@@ -38,9 +38,9 @@ aux2_streamer.on(Hls.Events.MEDIA_ATTACHED, function () {
 */
 
 // Load m3u8 file
-main_streamer.loadSource("public/output.m3u8");
-aux1_streamer.loadSource("public/aux1_.m3u8");
-aux2_streamer.loadSource("public/aux2_.m3u8");
+main_streamer.loadSource("public_content/output.m3u8");
+aux1_streamer.loadSource("public_content/aux1_.m3u8");
+aux2_streamer.loadSource("public_content/aux2_.m3u8");
 
 // Run Player function
 function runPlayer(playerObj) {
