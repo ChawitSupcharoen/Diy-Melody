@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "67dede67fdd5413388622267"
+  },
+  "user": "Focus",
+  "pass": "$2b$12$wcZTgZ8aoAXrgPpx/BAe8eCkm8pjzzcpyc8QAV5IqYt93GL8EpxqG",
+  "preference": {
+    "foo": "bar"
+  },
+  "song-list": []
+},
+{
+  "_id": {
+    "$oid": "67dededffdd5413388622268"
+  },
+  "user": "Ticha",
+  "pass": "$2b$12$UuX6L1i5LDS2lgxZ9L1M1erq9.sgYK7.bgBAf60kDR0.aAL0dvrcK",
+  "preference": {},
+  "song-list": []
+}
+]

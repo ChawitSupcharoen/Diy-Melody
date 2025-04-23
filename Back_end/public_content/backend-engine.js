@@ -207,4 +207,28 @@ function handle_upload() {
 
 }
 
+
+// Handle delete songs
+function handle_logout() {
+
+  fetch("logout", {
+    method: 'POST',
+  }).then((response) => {
+
+    // If get unauthorized access, redirect to login
+    if (response.status === 401) {
+      window.location = "/public/login.html"
+
+    }
+
+    // Default error handling
+    if (!response.ok) {
+      throw new Error(`Fetch client data failed: Response code: ${response.status}`);
+
+    }
+
+  });
+
+}
+
 getClientPref();
