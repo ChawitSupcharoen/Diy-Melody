@@ -16,7 +16,7 @@ import subprocess
 import shlex
 
 '''Constant'''
-DB_URL = "10.10.0.6:27017"
+DB_URL = "10.42.0.3:27017"
 
 ILLEGAL_REGEX_CHARACTER = ['.', '?', '+', '*', '|', '{', '}', '[', ']', '(', ')', '<', '>', '"', '\\', '@', '#']
 ILLEGAL_DB_CHARACTER = ['?', '*', '\\']
