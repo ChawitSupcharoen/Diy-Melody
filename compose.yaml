@@ -1,0 +1,41 @@
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: App.dockerfile
+        ports:
+            - "3000:8080"
+
+        volumes:
+            - ./Back_end/public_content/.:/mnt/app/public_content
+        tty: true
+        stdin_open: true
+        command: /bin/bash
+        networks:
+            Webdev:
+                ipv4_address: 10.42.0.2
+        
+
+    database:
+        image: mongo:latest
+        ports: 
+            - "27017:27017"
+
+        networks:
+            Webdev:
+                ipv4_address: 10.42.0.3    
+
+    
+
+networks:
+    Webdev:
+        ipam:
+            driver: default
+            config:
+                - subnet: "10.42.0.0/24"
+
+
+
+
+
