@@ -22,6 +22,9 @@ services:
         ports: 
             - "27017:27017"
 
+        volumes:
+            - ./database_volume:/data/db
+
         networks:
             Webdev:
                 ipv4_address: 10.42.0.3    
