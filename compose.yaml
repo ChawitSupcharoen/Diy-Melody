@@ -9,6 +9,7 @@ services:
 
         volumes:
             - ./Back_end/public_content/.:/mnt/app/public_content
+            - ./Back_end/client_content/.:/mnt/app/client_content
         tty: true
         stdin_open: true
         command: /bin/bash
