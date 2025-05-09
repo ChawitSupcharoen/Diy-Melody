@@ -9,7 +9,6 @@ services:
 
         volumes:
             - ./Back_end/public_content/.:/mnt/app/public_content
-            - ./Back_end/client_content/.:/mnt/app/client_content
         tty: true
         stdin_open: true
         command: /bin/bash
@@ -22,9 +21,6 @@ services:
         image: mongo:latest
         ports: 
             - "27017:27017"
-
-        volumes:
-            - ./database_volume:/data/db
 
         networks:
             Webdev:

@@ -2,7 +2,7 @@ FROM debian:bookworm-20250407
 
 WORKDIR /mnt/app
 
-# COPY Back_end/client_content /mnt/app/client_content
+COPY Back_end/client_content /mnt/app/client_content
 COPY Back_end/temp /mnt/app/temp
 COPY Back_end/app.py /mnt/app/app.py
 COPY Back_end/transcode.py /mnt/app/transcode.py
