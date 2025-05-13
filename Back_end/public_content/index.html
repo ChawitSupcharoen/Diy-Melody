@@ -1,3 +1,130 @@
+<<<<<<< Updated upstream
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script src="public/backend-engine.js" defer></script>
+    
+    <title>DIY Melody</title>
+</head>
+
+<body>
+    <div style="grid-row: 1;">
+        <a>Main Melody</a>
+        <input 
+            type="range" 
+            max="100" 
+            min="0" 
+            step="1" 
+            value="50" 
+            id = "player_volume" 
+            onchange="updateAudio(
+                document.getElementById('player_volume'),
+                document.getElementById('player')
+            )"
+        />
+        <button onclick="runPlayer(document.getElementById('player'))">Play</button>
+        <button onclick="pausePlayer(document.getElementById('player'))">Stop</button>
+        <a>Loop: </a>
+        <input 
+            type="checkbox" 
+            id="main-player-loop" 
+            onchange="loopPlayer(
+                document.getElementById('main-player-loop'),
+                document.getElementById('player')
+            )"
+        />
+
+    </div>
+    <div style="grid-row: 1;">
+        <a>Aux Melody #1</a>
+        <input 
+            type="range" 
+            max="100" 
+            min="0" 
+            step="1" 
+            value="50" 
+            id = "aux1_player_volume" 
+            onchange="updateAudio(
+                document.getElementById('aux1_player_volume'),
+                document.getElementById('aux1-player')
+                )"
+        />
+        <button onclick="runPlayer(document.getElementById('aux1-player'))">Play</button>
+        <button onclick="pausePlayer(document.getElementById('aux1-player'))">Stop</button>
+        <a>Loop: </a>
+        <input 
+            type="checkbox" 
+            id="aux1-player-loop" 
+            onchange="loopPlayer(
+                document.getElementById('aux1-player-loop'),
+                document.getElementById('aux1-player')
+            )"
+        />
+    </div>
+
+    <div style="grid-row: 1;">
+        <a>Aux Melody #2</a>
+        <input 
+            type="range" 
+            max="100" 
+            min="0" 
+            step="1" 
+            value="50" 
+            id = "aux2_player_volume" 
+            onchange="updateAudio(
+                document.getElementById('aux2_player_volume'),
+                document.getElementById('aux2-player')
+                )"
+        />
+        <button onclick="runPlayer(document.getElementById('aux2-player'))">Play</button>
+        <button onclick="pausePlayer(document.getElementById('aux2-player'))">Stop</button>
+        <a>Loop: </a>
+        <input 
+            type="checkbox" 
+            id="aux2-player-loop" 
+            onchange="loopPlayer(
+                document.getElementById('aux2-player-loop'),
+                document.getElementById('aux2-player')
+            )"
+        />
+    </div>
+
+    <div style="overflow: scroll; height: 100px; width: 500px;" id = "song-list">
+        
+
+    </div>
+    <div>
+        <input type="text" id="song-select">
+        <button onclick="handle_play();">Select song</button>
+        <button onclick="handle_del();">Remove song</button>
+    </div>
+
+    <div>
+        <input type="file" id="upload-payload">
+        <button onclick="handle_upload();">Upload</button>
+    </div>
+
+    <div>
+        <button onclick="handle_logout();">Logout</button>
+    </div>
+
+    <audio id="player" preload="auto">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="aux1-player" preload="auto">
+    </audio>
+    <audio id="aux2-player" preload="auto">
+    </audio>
+
+
+</body>
+
+</html>
+=======
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,9 +135,10 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
     <script type="module" crossorigin src="/public/assets/index-Hl_wlIGa.js"></script>
   </head>
-  <body>
-    <div id="app"></div>
-    <canvas id='canvas3d' style="background-color: #0F002F;"></canvas>
+  <body style="width: 100%; height: 100%;">
+    <div id="app"></div>
+
+    <canvas id='canvas3d' style="background-color: #0F002F; width: 100%; height: 100%;" ></canvas>
     <audio id="main-player" preload="auto">
       Your browser does not support the audio element.
     </audio>
@@ -18,3 +146,4 @@
     <audio id="aux2-player" preload="auto"></audio>
   </body>
 </html>
+>>>>>>> Stashed changes
