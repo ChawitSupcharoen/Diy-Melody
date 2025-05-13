@@ -15,20 +15,40 @@
     <img src="bg-login.png" alt="">
     <p class="bg-container"></p>
     <div class="container">
-    <div style="grid-row: 1; margin-top: 20px;">
-        <a>Username  |</a>
-        <input type="text" id="user-txt-box"/>
+        <div style="grid-row: 1; margin-top: 20px;">
+            <a>Username |</a>
+            <input type="text" id="user-txt-box" />
+        </div>
+        <br>
+        <div style="grid-row: 1; margin-top: 20px;">
+            <a>Password |</a>
+            <input type="password" id="password-txt-box" />
+        </div>
+        <br>
+        <button onclick="send_login()">Login</button>
     </div>
-    <br>
-    <div style="grid-row: 1; margin-top: 20px;">
-        <a>Password  |</a>
-        <input type="password" id="password-txt-box"/>
-    </div>
-    <br>
-    <button onclick="send_login()">Login</button>
-</div>
-    
+
     <script>
+
+        const username_box = document.getElementById("user-txt-box");
+        const password_box = document.getElementById("password-txt-box");
+
+        username_box.addEventListener('keydown', function (event) {
+
+            if (event.key === 'Enter') {
+
+                send_login()
+            }
+        });
+
+        password_box.addEventListener('keydown', function (event) {
+
+            if (event.key === 'Enter') {
+
+                send_login()
+            }
+        });
+
         async function send_login() {
             const url = "/login_api";
             const username = document.getElementById("user-txt-box").value;
@@ -47,7 +67,7 @@
                     throw new Error(`Response status: ${response.status}`);
                 }
 
-                window.location.href = "/"; 
+                window.location.href = "/";
             } catch (error) {
                 console.error(error.message);
             }
