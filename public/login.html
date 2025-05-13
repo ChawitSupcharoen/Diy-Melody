@@ -5,21 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+    <link rel="stylesheet" href="login.css">
+
 </head>
 
 <body>
-    <div style="grid-row: 1;">
-        <a>Username</a>
+    <!-- <script type="module" src="login.js" defer></script>
+    <canvas id='canvas3d' style="background-color: #0F002F;"></canvas> -->
+    <img src="bg-login.png" alt="">
+    <p class="bg-container"></p>
+    <div class="container">
+    <div style="grid-row: 1; margin-top: 20px;">
+        <a>Username  |</a>
         <input type="text" id="user-txt-box"/>
     </div>
     <br>
-    <div style="grid-row: 1;">
-        <a>Password</a>
+    <div style="grid-row: 1; margin-top: 20px;">
+        <a>Password  |</a>
         <input type="password" id="password-txt-box"/>
     </div>
     <br>
     <button onclick="send_login()">Login</button>
-
+</div>
+    
     <script>
         async function send_login() {
             const url = "/login_api";

@@ -39,7 +39,7 @@ let main_player_prop = {
 
 let aux1_streamer = new Hls();
 aux1_streamer.attachMedia(aux1_player_obj);
-aux1_streamer.loadSource("public/aux1_.m3u8");
+aux1_streamer.loadSource("public/aux1.m3u8");
 let aux1_player_prop = {
   play: false,
   loop: false,
@@ -49,13 +49,33 @@ let aux1_player_prop = {
 
 let aux2_streamer = new Hls();
 aux2_streamer.attachMedia(aux2_player_obj);
-aux2_streamer.loadSource("public/aux2_.m3u8");
+aux2_streamer.loadSource("public/aux2.m3u8");
 let aux2_player_prop = {
   play: false,
   loop: false,
   speed: 1,
   volume: 1,
 }
+
+// Call and API and check if log in
+const response = fetch("/getclientdata")
+    .then((response) => {
+
+      // If get unauthorized access, redirect to login
+      if (response.status === 401) {
+        window.location = "/public/login.html"
+
+      }
+
+      // Default error handling
+      if (!response.ok) {
+        throw new Error(`Fetch client data failed: Response code: ${response.status}`);
+
+      }
+
+      return response.json();
+
+    });
 
 // Initiate spline 3d 
 const app = new Application(canvas);
