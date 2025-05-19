@@ -154,7 +154,7 @@ document.getElementById('main-speedup').addEventListener('click', (event) => dec
 
 // Initiate spline 3d 
 const app = new Application(canvas);
-app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(() => {
+app.load('/public/mini_room_art_copy.spline').then(() => {
   app.addEventListener('mouseDown', (e) => {
 
     // Play/Pause main audio
@@ -195,6 +195,34 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
         aux2_player_prop.play = true;
         aux2_player_obj.play();
       }
+    }
+
+    // Sound control
+    if (e.target.name === "main-voldown") {
+      decrementVolume('main-voldown', main_player_obj)
+    }
+    if (e.target.name === "aux1-voldown") {
+      decrementVolume('aux1-voldown', aux1_player_obj)
+    }
+    if (e.target.name === "aux2-voldown") {
+      decrementVolume('aux2-voldown', aux2_player_obj)
+    }
+
+    if (e.target.name === "main-volup") {
+      incrementVolume('main-volup', main_player_obj)
+    }
+    if (e.target.name === "aux1-volup") {
+      incrementVolume('aux1-volup', aux1_player_obj)
+    }
+    if (e.target.name === "aux2-volup") {
+      incrementVolume('aux2-volup', aux2_player_obj)
+    }
+
+    if (e.target.name === "main-speeddown") {
+      incrementSpeed('main-speeddown', main_player_obj)
+    }
+    if (e.target.name === "main-speedup") {
+      decrementSpeed('main-speedup', main_player_obj)
     }
 
     // Gramophone upload songs

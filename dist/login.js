@@ -47,8 +47,8 @@ alert(
 // }
 
 // Initiate spline 3d 
-// const app = new Application(canvas);
-// app.load('https://prod.spline.design/QH8TOe3HuKIAZJHQ/scene.splinecode').then(() => {
+const app = new Application(canvas);
+app.load('https://prod.spline.design/QH8TOe3HuKIAZJHQ/scene.splinecode').then(() => {
 
 //     // Play/Pause main audio
 //     if (e.target.name === "speaker") {
