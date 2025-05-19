@@ -127,7 +127,7 @@ function incrementSpeed(event, playerObj) {
 function decrementSpeed(event, playerObj) {
 
   let speed = playerObj.playbackRate;
-  speed = speed + 0.1;
+  speed = speed - 0.1;
 
   // Cap value from 0.1 to 2
   if (speed < 0.1) {
@@ -139,15 +139,15 @@ function decrementSpeed(event, playerObj) {
 }
 
 // Attach event listener to button (like spline's event listener)
-document.getElementById('aux2-voldown').addEventListener('click', (event) => decrementVolume(event, aux2_player_obj));
-document.getElementById('aux1-voldown').addEventListener('click', (event) => decrementVolume(event, aux1_player_obj));
-document.getElementById('main-voldown').addEventListener('click', (event) => decrementVolume(event, main_player_obj));
-document.getElementById('main-volup').addEventListener('click', (event) => incrementVolume(event, main_player_obj));
-document.getElementById('aux1-volup').addEventListener('click', (event) => incrementVolume(event, aux1_player_obj));
-document.getElementById('aux2-volup').addEventListener('click', (event) => incrementVolume(event, aux2_player_obj));
+// document.getElementById('aux2-voldown').addEventListener('click', (event) => decrementVolume(event, aux2_player_obj));
+// document.getElementById('aux1-voldown').addEventListener('click', (event) => decrementVolume(event, aux1_player_obj));
+// document.getElementById('main-voldown').addEventListener('click', (event) => decrementVolume(event, main_player_obj));
+// document.getElementById('main-volup').addEventListener('click', (event) => incrementVolume(event, main_player_obj));
+// document.getElementById('aux1-volup').addEventListener('click', (event) => incrementVolume(event, aux1_player_obj));
+// document.getElementById('aux2-volup').addEventListener('click', (event) => incrementVolume(event, aux2_player_obj));
 
-document.getElementById('main-speeddown').addEventListener('click', (event) => incrementSpeed(event, main_player_obj));
-document.getElementById('main-speedup').addEventListener('click', (event) => decrementSpeed(event, main_player_obj));
+// document.getElementById('main-speeddown').addEventListener('click', (event) => incrementSpeed(event, main_player_obj));
+// document.getElementById('main-speedup').addEventListener('click', (event) => decrementSpeed(event, main_player_obj));
 
 
 
@@ -219,10 +219,10 @@ app.load('/public/mini_room_art_copy.spline').then(() => {
     }
 
     if (e.target.name === "main-speeddown") {
-      incrementSpeed('main-speeddown', main_player_obj)
+      decrementSpeed('main-speeddown', main_player_obj)
     }
     if (e.target.name === "main-speedup") {
-      decrementSpeed('main-speedup', main_player_obj)
+      incrementSpeed('main-speedup', main_player_obj)
     }
 
     // Gramophone upload songs
