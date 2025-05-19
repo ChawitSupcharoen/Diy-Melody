@@ -29,10 +29,10 @@ if (!Hls.isMSESupported()) {
 let main_streamer = new Hls();
 main_streamer.attachMedia(main_player_obj);
 main_streamer.loadSource("public/output.m3u8");
+main_player_obj.loop = true;
 let main_player_prop = {
   source: "public/output.m3u8",
   play: false,
-  loop: false,
   speed: 1,
   volume: 1,
 }
@@ -40,42 +40,117 @@ let main_player_prop = {
 let aux1_streamer = new Hls();
 aux1_streamer.attachMedia(aux1_player_obj);
 aux1_streamer.loadSource("public/aux1.m3u8");
+aux1_player_obj.loop = true;
 let aux1_player_prop = {
   play: false,
-  loop: false,
-  speed: 1,
   volume: 1,
 }
 
 let aux2_streamer = new Hls();
 aux2_streamer.attachMedia(aux2_player_obj);
 aux2_streamer.loadSource("public/aux2.m3u8");
+aux2_player_obj.loop = true;
 let aux2_player_prop = {
   play: false,
-  loop: false,
-  speed: 1,
   volume: 1,
 }
 
 // Call and API and check if log in
 const response = fetch("/getclientdata")
-    .then((response) => {
+  .then((response) => {
 
-      // If get unauthorized access, redirect to login
-      if (response.status === 401) {
-        window.location = "/public/login.html"
+    // If get unauthorized access, redirect to login
+    if (response.status === 401) {
+      window.location = "/public/login.html"
 
-      }
+    }
 
-      // Default error handling
-      if (!response.ok) {
-        throw new Error(`Fetch client data failed: Response code: ${response.status}`);
+    // Default error handling
+    if (!response.ok) {
+      throw new Error(`Fetch client data failed: Response code: ${response.status}`);
 
-      }
+    }
 
-      return response.json();
+    return response.json();
 
-    });
+  });
+
+// playerObj is the audiotag in html designated as
+// main_player_obj : Music player
+// aux1_player_obj : Rain sound effect
+// aux2_player_obj : Water flow sound effect
+
+function incrementVolume(event, playerObj) {
+
+  let volume = playerObj.volume;
+  volume = volume + 0.1;
+
+  // Cap value from 0 to 1
+  if (volume > 1.0) {
+    volume = 1.0;
+  }
+
+  // Apply volume value to player object, volume take 0.0 to 1.0 as floating point
+  playerObj.volume = volume;
+}
+
+
+function decrementVolume(event, playerObj) {
+
+  let volume = playerObj.volume;
+  volume = volume - 0.1;
+
+  // Cap value from 0 to 1
+  if (volume < 0.0) {
+    volume = 0.0;
+  }
+
+  // Apply volume value to player object, volume take 0.0 to 1.0 as floating point
+  playerObj.volume = volume;
+}
+
+function incrementSpeed(event, playerObj) {
+
+  let speed = playerObj.playbackRate;
+  speed = speed + 0.1;
+
+  // Cap value from 0.1 to 2
+  if (speed > 2.0) {
+    speed = 2.0;
+  }
+
+  // Apply volume value to player object, playbackrate take floating point
+  playerObj.playbackRate = speed;
+}
+
+
+function decrementSpeed(event, playerObj) {
+
+  let speed = playerObj.playbackRate;
+  speed = speed + 0.1;
+
+  // Cap value from 0.1 to 2
+  if (speed < 0.1) {
+    speed = 0.1;
+  }
+
+  // Apply volume value to player object, playbackrate take floating point
+  playerObj.playbackRate = speed;
+}
+
+// Attach event listener to button (like spline's event listener)
+document.getElementById('aux2-voldown').addEventListener('click', (event) => decrementVolume(event, aux2_player_obj));
+document.getElementById('aux1-voldown').addEventListener('click', (event) => decrementVolume(event, aux1_player_obj));
+document.getElementById('main-voldown').addEventListener('click', (event) => decrementVolume(event, main_player_obj));
+document.getElementById('main-volup').addEventListener('click', (event) => incrementVolume(event, main_player_obj));
+document.getElementById('aux1-volup').addEventListener('click', (event) => incrementVolume(event, aux1_player_obj));
+document.getElementById('aux2-volup').addEventListener('click', (event) => incrementVolume(event, aux2_player_obj));
+
+document.getElementById('main-speeddown').addEventListener('click', (event) => incrementSpeed(event, main_player_obj));
+document.getElementById('main-speedup').addEventListener('click', (event) => decrementSpeed(event, main_player_obj));
+
+
+
 
 // Initiate spline 3d 
 const app = new Application(canvas);
@@ -88,10 +163,15 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
         main_player_prop.play = false;
         main_player_obj.pause();
       } else {
-        main_player_prop.play = true;
-        main_streamer.loadSource(main_player_prop.source);
-        main_player_obj.play();
+
+        if (main_player_prop.source_change === true) {
+          main_streamer.loadSource(main_player_prop.source);
+          main_player_prop.source_change = false;
+        }
         
+        main_player_prop.play = true;
+        main_player_obj.play();
+
       }
     }
 
@@ -119,6 +199,12 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
 
     // Gramophone upload songs
     if (e.target.name === "Main Malody") {
+
+      // Song must be pause first, else don't allow player to upload new songs
+      if (main_player_prop.play === true) {
+        alert("Please stop the music before uploading new one.");
+        return;
+      }
 
       // Request all songs pocessed by user
       const response = fetch("/getclientdata")
@@ -170,11 +256,6 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
         });
 
 
-
-
-
-
-
       // Create file input HTML element
       const fileInput = document.createElement('input');
       fileInput.type = 'file';
@@ -218,10 +299,8 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
 
           })
           .then((response) => {
-            main_player_prop.play = false;
-            main_player_obj.pause();
             main_player_prop.source = "media/" + response[0] + ".m3u8";
-            
+            main_player_prop.source_change = true;
           });
       }
     }
@@ -233,15 +312,6 @@ app.load('https://prod.spline.design/9Q5dBRAbLKVzmrFy/scene.splinecode').then(()
 });
 
 
-function update_player(player_obj, player_prop) {
-  player_obj.loop = player_prop.loop;
-  player_obj.volume = player_prop.volume;
-  player_obj.playbackRate = player_prop.speed;
 
-  if (player_prop.play === true) {
-    player_obj.play();
-  } else {
-    console.log(player_prop);
-  }
 
-}
+
